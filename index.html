@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Deepak Gupta | Full Stack Developer & Founder</title>
+    <meta name="description"
+        content="Portfolio of Deepak Gupta, Full Stack Developer and Founder of ITworldhub and BhookhaPanda">
+
+    <!-- Favicon -->
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👨‍💻</text></svg>">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    animation: {
+                        'float': 'float 3s ease-in-out infinite',
+                        'fade-in': 'fadeIn 1s ease-in',
+                        'bounce-slow': 'bounce 2s infinite',
+                        'spin-slow': 'spin 5s linear infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite'
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* Custom styles */
+        .gradient-text {
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            background-image: linear-gradient(90deg, #3b82f6, #8b5cf6);
+        }
+
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .social-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #3b82f6;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .active::after {
+            width: 100%;
+        }
+
+        .skill-badge {
+            transition: all 0.3s ease;
+        }
+
+        .skill-badge:hover {
+            transform: scale(1.05);
+        }
+
+        /* Smooth transitions */
+        * {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        /* Mobile navbar */
+        @media (min-width: 768px) {
+            .mobile-bottom-nav {
+                display: none !important;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .desktop-top-nav {
+                display: none !important;
+            }
+        }
+
+        /* Animation classes */
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .animate-bounce-slow {
+            animation: bounce-slow 2s infinite;
+        }
+
+        .testimonial-card {
+            transition: all 0.5s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .sticky-note {
+            position: relative;
+            background: #fff9c4;
+            color: #333;
+            padding: 1.5rem;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transform: rotate(-2deg);
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+        }
+
+        .sticky-note::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 20px;
+            border-width: 10px 10px 0;
+            border-style: solid;
+            border-color: #fff9c4 transparent;
+        }
+
+        .dark .sticky-note {
+            background: #fef08a;
+            color: #1a1a1a;
+        }
+    </style>
+</head>
+
+<body class="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200">
+    <!-- Navbar -->
+    <nav
+        class="desktop-top-nav navbar navbar-expand-lg sticky-top bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700">
+        <div class="container mx-auto px-4">
+            <a class="navbar-brand font-bold text-xl flex items-center" href="#">
+                <span class="gradient-text">Deepak Gupta</span>
+            </a>
+            <div class="d-flex items-center gap-4">
+                <div class="hidden md:flex gap-6">
+                    <a href="#home" class="nav-link">Home</a>
+                    <a href="#about" class="nav-link">About</a>
+                    <a href="#skills" class="nav-link">Skills</a>
+                    <a href="#projects" class="nav-link">Projects</a>
+                    <a href="#testimonials" class="nav-link">Testimonials</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                </div>
+                <button onclick="toggleTheme()"
+                    class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                    <i class="fas fa-moon dark:hidden"></i>
+                    <i class="fas fa-sun hidden dark:block"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Bottom Nav -->
+    <nav
+        class="mobile-bottom-nav fixed-bottom bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-t border-gray-300 dark:border-gray-700 flex justify-around py-3 z-50">
+        <a href="#home"
+            class="text-gray-600 dark:text-gray-300 p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+            <i class="fas fa-home text-lg"></i>
+        </a>
+        <a href="#about"
+            class="text-gray-600 dark:text-gray-300 p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+            <i class="fas fa-user text-lg"></i>
+        </a>
+        <a href="#skills"
+            class="text-gray-600 dark:text-gray-300 p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+            <i class="fas fa-code text-lg"></i>
+        </a>
+        <a href="#projects"
+            class="text-gray-600 dark:text-gray-300 p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+            <i class="fas fa-folder-open text-lg"></i>
+        </a>
+        <a href="#testimonials"
+            class="text-gray-600 dark:text-gray-300 p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+            <i class="fas fa-quote-left text-lg"></i>
+        </a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center px-4">
+        <div class="container mx-auto text-center">
+            <div class="max-w-3xl mx-auto">
+                <div
+                    class="w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden border-4 border-blue-500 dark:border-purple-500 shadow-lg animate-float">
+                    <img src="https://res.cloudinary.com/dlga3sd7j/image/upload/v1724477382/pjsztejv8l2tawlyyba4.jpg"
+                        alt="Deepak Gupta" class="w-full h-full object-cover">
+                </div>
+                <h1 class="text-5xl md:text-6xl font-bold mb-4 animate-fade-in">
+                    Hi, I'm <span class="gradient-text">Deepak Gupta</span> 👋
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 animate-fade-in">
+                    Full Stack Developer | Startup Founder | UI/UX Enthusiast from Rewa, MP
+                </p>
+                <div class="flex flex-wrap justify-center gap-4 animate-fade-in">
+                    <a href="#projects"
+                        class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-medium transition-colors shadow-lg hover:shadow-xl animate-pulse-slow">
+                        View My Work
+                    </a>
+                    <a href="#contact"
+                        class="px-6 py-3 border border-blue-600 text-blue-600 hover:bg-blue-50 dark:hover:bg-gray-800 rounded-full font-medium transition-colors">
+                        Contact Me
+                    </a>
+                </div>
+                <div class="mt-12 flex justify-center gap-6 animate-fade-in">
+                    <a href="https://github.com/DeepakGupta2002" target="_blank"
+                        class="social-icon text-2xl text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-purple-400 transition-transform">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/deepak-gupta-a2891b300" target="_blank"
+                        class="social-icon text-2xl text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-purple-400 transition-transform">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://itworldhub.com" target="_blank"
+                        class="social-icon text-2xl text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-purple-400 transition-transform">
+                        <i class="fas fa-globe"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="py-20 bg-gray-50 dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">About <span class="gradient-text">Me</span></h2>
+                <div class="w-20 h-1 bg-blue-600 dark:bg-purple-500 mx-auto"></div>
+            </div>
+
+            <div class="flex flex-col lg:flex-row items-center gap-12 max-w-6xl mx-auto">
+                <div class="lg:w-1/3 flex justify-center">
+                    <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-2xl overflow-hidden shadow-xl animate-float">
+                        <img src="https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                            alt="Deepak working" class="w-full h-full object-cover">
+                    </div>
+                </div>
+
+                <div class="lg:w-2/3">
+                    <h3 class="text-2xl font-semibold mb-4">Full Stack Developer & Founder</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-6">
+                        I'm a BCA student at Makhanlal Chaturvedi National University with hands-on experience in web
+                        development.
+                        I'm the founder of ITworldhub (a software development company) and BhookhaPanda (a parent
+                        company for food services).
+                        I specialize in building dynamic websites, user authentication systems, and cloud-based
+                        solutions.
+                    </p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                        <div class="flex items-start gap-4">
+                            <div class="text-blue-600 dark:text-purple-500 text-xl mt-1">
+                                <i class="fas fa-briefcase"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Experience</h4>
+                                <p class="text-gray-600 dark:text-gray-400">Web Development Intern at NTI Tech Academy
+                                </p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="text-blue-600 dark:text-purple-500 text-xl mt-1">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Phone</h4>
+                                <p class="text-gray-600 dark:text-gray-400">+91 7389152954</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="text-blue-600 dark:text-purple-500 text-xl mt-1">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Email</h4>
+                                <p class="text-gray-600 dark:text-gray-400">Dg476504@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="text-blue-600 dark:text-purple-500 text-xl mt-1">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Location</h4>
+                                <p class="text-gray-600 dark:text-gray-400">Rewa, Madhya Pradesh</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="#"
+                        class="inline-flex items-center text-blue-600 dark:text-purple-400 font-medium hover:underline">
+                        Download CV
+                        <i class="fas fa-download ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" class="py-20">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">My <span class="gradient-text">Skills</span></h2>
+                <div class="w-20 h-1 bg-blue-600 dark:bg-purple-500 mx-auto"></div>
+                <p class="max-w-2xl mx-auto mt-6 text-gray-600 dark:text-gray-300">
+                    I've developed expertise in various technologies through academic projects and professional
+                    experience.
+                </p>
+            </div>
+
+            <div class="max-w-4xl mx-auto">
+                <div class="mb-12">
+                    <h3 class="text-2xl font-semibold mb-6 text-center">Frontend Development</h3>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <div
+                            class="skill-badge px-6 py-3 bg-white dark:bg-gray-800 rounded-full shadow-md flex items-center gap-2 animate-bounce-slow">
+                            <i class="fab fa-html5 text-orange-500 text-xl"></i>
+                            <span>HTML5</span>
+                        </div>
+                        <div
+                            class="skill-badge px-6 py-3 bg-white dark:bg-gray-800 rounded-full shadow-md flex items-center gap-2 animate-bounce-slow">
+                            <i class="fab fa-css3-alt text-blue-500 text-xl"></i>
+                            <span>CSS3</span>
+                        </div>
+                        <div
+                            class="skill-badge px-6 py-3 bg-white dark:bg-gray-800 rounded-full shadow-md flex items-center gap-2 animate-bounce-slow">
+                            <i class="fab fa-js-square text-yellow-500 text-xl"></i>
+                            <span>JavaScript</span>
+                        </div>
+                        <div
+                            class="skill-badge px-6 py-3 bg-white dark:bg-gray-800 rounded-full shadow-md flex items-center gap-2 animate-bounce-slow">
+                            <i class="fab fa-bootstrap text-purple-500 text-xl"></i>
+                            <span>Bootstrap</span>
+                        </div>
+                        <div
+                            class="skill-badge px-6 py-3 bg-white dark:bg-gray-800 rounded-full shadow-md flex items-center gap-2 animate-bounce-slow">
+                            <img src="https://www.vectorlogo.zone/logos/tailwindcss/tailwindcss-icon.svg"
+                                alt="Tailwind CSS" class="w-5 h-5">
+                            <span>Tailwind CSS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-12">
+                    <h3 class="text-2xl font-semibold mb-6 text-center">Backend Development</h3>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <div
+                            class="skill-badge px-6 py-3 bg-white dark:bg-gray-800 rounded-full shadow-md flex items-center gap-2 animate-bounce-slow">
+                            <i class="fab fa-node-js text-green-600 text-xl"></i>
+                            <span>Node.js</span>
+                        </div>
+                        <div
+                            class="skill-badge px-6 py-3 bg-white dark:bg-gray-800 rounded-full shadow-md flex items-center gap-2 animate-bounce-slow">
+                            <i class="fas fa-server text-green-500 text-xl"></i>
+                            <span>Express.js</span>
+                        </div>
+                        <div
+                            class="skill-badge px-6 py-3 bg-white dark:bg-gray-800 rounded-full shadow-md flex items-center gap-2 animate-bounce-slow">
+                            <i class="fas fa-database text-blue-400 text-xl"></i>
+                            <span>MongoDB</span>
+                        </div>
+                        <div
+                            class="skill-badge px-6 py-3 bg-white dark:bg-gray-800 rounded-full shadow-md flex items-center gap-2 animate-bounce-slow">
+                            <i class="fas fa-database text-blue-700 text-xl"></i>
+                            <span>MySQL</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-semibold mb-6 text-center">Other Skills</h3>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <div
+                            class="skill-badge px-6 py-3 bg-white dark:bg-gray-800 rounded-full shadow-md flex items-center gap-2 animate-bounce-slow">
+                            <i class="fab fa-git-alt text-orange-600 text-xl"></i>
+                            <span>Git</span>
+                        </div>
+                        <div
+                            class="skill-badge px-6 py-3 bg-white dark:bg-gray-800 rounded-full shadow-md flex items-center gap-2 animate-bounce-slow">
+                            <i class="fab fa-docker text-blue-500 text-xl"></i>
+                            <span>Docker</span>
+                        </div>
+                        <div
+                            class="skill-badge px-6 py-3 bg-white dark:bg-gray-800 rounded-full shadow-md flex items-center gap-2 animate-bounce-slow">
+                            <i class="fas fa-search-dollar text-green-600 text-xl"></i>
+                            <span>SEO</span>
+                        </div>
+                        <div
+                            class="skill-badge px-6 py-3 bg-white dark:bg-gray-800 rounded-full shadow-md flex items-center gap-2 animate-bounce-slow">
+                            <i class="fas fa-paint-brush text-pink-500 text-xl"></i>
+                            <span>UI/UX Design</span>
+                        </div>
+                        <div
+                            class="skill-badge px-6 py-3 bg-white dark:bg-gray-800 rounded-full shadow-md flex items-center gap-2 animate-bounce-slow">
+                            <i class="fas fa-mobile-alt text-blue-400 text-xl"></i>
+                            <span>Responsive Design</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience -->
+    <section class="py-20 bg-gray-50 dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Work <span class="gradient-text">Experience</span></h2>
+                <div class="w-20 h-1 bg-blue-600 dark:bg-purple-500 mx-auto"></div>
+            </div>
+
+            <div class="max-w-4xl mx-auto">
+                <div class="relative">
+                    <!-- Timeline line -->
+                    <div class="absolute left-1/2 w-1 h-full bg-gray-200 dark:bg-gray-700 transform -translate-x-1/2">
+                    </div>
+
+                    <!-- Timeline items -->
+                    <div class="mb-8">
+                        <div class="flex flex-col md:flex-row items-center md:items-start gap-6 relative">
+                            <div class="md:w-1/2 md:pr-12 md:text-right">
+                                <h4 class="text-xl font-semibold">Founder & Full Stack Developer</h4>
+                                <p class="text-blue-600 dark:text-purple-400">ITworldhub.com</p>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">2023 - Present</p>
+                            </div>
+                            <div
+                                class="hidden md:block w-6 h-6 rounded-full bg-blue-600 dark:bg-purple-500 border-4 border-white dark:border-gray-800 absolute left-1/2 transform -translate-x-1/2">
+                            </div>
+                            <div class="md:w-1/2 md:pl-12">
+                                <p class="text-gray-600 dark:text-gray-300">
+                                    Founded a service-based software development company offering web development,
+                                    app development, CRM systems, and UI/UX design services.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-8">
+                        <div class="flex flex-col md:flex-row-reverse items-center md:items-start gap-6 relative">
+                            <div class="md:w-1/2 md:pl-12">
+                                <h4 class="text-xl font-semibold">Founder</h4>
+                                <p class="text-blue-600 dark:text-purple-400">BhookhaPanda (Parent Company)</p>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">2022 - Present</p>
+                            </div>
+                            <div
+                                class="hidden md:block w-6 h-6 rounded-full bg-blue-600 dark:bg-purple-500 border-4 border-white dark:border-gray-800 absolute left-1/2 transform -translate-x-1/2">
+                            </div>
+                            <div class="md:w-1/2 md:pr-12 md:text-right">
+                                <p class="text-gray-600 dark:text-gray-300">
+                                    Founded BhookhaPanda - a parent company that operates TiffinTaste (food service)
+                                    and BhookhaPanda Mart (grocery delivery).
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-8">
+                        <div class="flex flex-col md:flex-row items-center md:items-start gap-6 relative">
+                            <div class="md:w-1/2 md:pr-12 md:text-right">
+                                <h4 class="text-xl font-semibold">Web Development Intern</h4>
+                                <p class="text-blue-600 dark:text-purple-400">NTI Tech Academy</p>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">2022</p>
+                            </div>
+                            <div
+                                class="hidden md:block w-6 h-6 rounded-full bg-blue-600 dark:bg-purple-500 border-4 border-white dark:border-gray-800 absolute left-1/2 transform -translate-x-1/2">
+                            </div>
+                            <div class="md:w-1/2 md:pl-12">
+                                <p class="text-gray-600 dark:text-gray-300">
+                                    Worked on web development projects using HTML, CSS, JavaScript, and Node.js.
+                                    Gained hands-on experience with backend development and database management.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" class="py-20">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Featured <span class="gradient-text">Projects</span></h2>
+                <div class="w-20 h-1 bg-blue-600 dark:bg-purple-500 mx-auto"></div>
+                <p class="max-w-2xl mx-auto mt-6 text-gray-600 dark:text-gray-300">
+                    Here are some of my recent projects that showcase my skills and experience.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div
+                    class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg card-hover transition-all duration-300">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80"
+                            alt="ITworldhub Project" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-semibold">ITworldhub.com</h3>
+                            <div class="flex gap-2">
+                                <a href="https://itworldhub.com" target="_blank"
+                                    class="text-blue-600 dark:text-purple-400 hover:text-blue-800 dark:hover:text-purple-600">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                                <a href="#"
+                                    class="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">
+                            Company portfolio website showcasing services, contact information, and client testimonials.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span
+                                class="px-3 py-1 bg-blue-100 dark:bg-gray-700 text-blue-800 dark:text-blue-300 text-xs rounded-full">Node.js</span>
+                            <span
+                                class="px-3 py-1 bg-blue-100 dark:bg-gray-700 text-blue-800 dark:text-blue-300 text-xs rounded-full">Express</span>
+                            <span
+                                class="px-3 py-1 bg-blue-100 dark:bg-gray-700 text-blue-800 dark:text-blue-300 text-xs rounded-full">MongoDB</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div
+                    class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg card-hover transition-all duration-300">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                            alt="TiffinTaste Project" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-semibold">TiffinTaste</h3>
+                            <div class="flex gap-2">
+                                <a href="#"
+                                    class="text-blue-600 dark:text-purple-400 hover:text-blue-800 dark:hover:text-purple-600">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                                <a href="#"
+                                    class="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">
+                            Food service platform under BhookhaPanda where users can view and track their orders.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span
+                                class="px-3 py-1 bg-blue-100 dark:bg-gray-700 text-blue-800 dark:text-blue-300 text-xs rounded-full">Node.js</span>
+                            <span
+                                class="px-3 py-1 bg-blue-100 dark:bg-gray-700 text-blue-800 dark:text-blue-300 text-xs rounded-full">MongoDB</span>
+                            <span
+                                class="px-3 py-1 bg-blue-100 dark:bg-gray-700 text-blue-800 dark:text-blue-300 text-xs rounded-full">Tailwind
+                                CSS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div
+                    class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg card-hover transition-all duration-300">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1415&q=80"
+                            alt="BhookhaPanda Mart" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-semibold">BhookhaPanda Mart</h3>
+                            <div class="flex gap-2">
+                                <a href="#"
+                                    class="text-blue-600 dark:text-purple-400 hover:text-blue-800 dark:hover:text-purple-600">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                                <a href="#"
+                                    class="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">
+                            Grocery delivery service under BhookhaPanda brand with inventory management.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span
+                                class="px-3 py-1 bg-blue-100 dark:bg-gray-700 text-blue-800 dark:text-blue-300 text-xs rounded-full">Node.js</span>
+                            <span
+                                class="px-3 py-1 bg-blue-100 dark:bg-gray-700 text-blue-800 dark:text-blue-300 text-xs rounded-full">Express</span>
+                            <span
+                                class="px-3 py-1 bg-blue-100 dark:bg-gray-700 text-blue-800 dark:text-blue-300 text-xs rounded-full">MongoDB</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="py-20 bg-gray-50 dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Client <span class="gradient-text">Testimonials</span></h2>
+                <div class="w-20 h-1 bg-blue-600 dark:bg-purple-500 mx-auto"></div>
+                <p class="max-w-2xl mx-auto mt-6 text-gray-600 dark:text-gray-300">
+                    Here's what people I've worked with have to say about my work.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Testimonial 1 -->
+                <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-lg testimonial-card">
+                    <div class="sticky-note mb-4">
+                        "BhookhaPanda's platform is amazing! The order tracking system works perfectly."
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Client"
+                            class="w-12 h-12 rounded-full">
+                        <div>
+                            <h4 class="font-semibold">Rahul Sharma</h4>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Customer, TiffinTaste</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-lg testimonial-card">
+                    <div class="sticky-note mb-4">
+                        "The ITworldhub website is clean, fast, and exactly what we needed for our business."
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Client"
+                            class="w-12 h-12 rounded-full">
+                        <div>
+                            <h4 class="font-semibold">Priya Patel</h4>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Client, ITworldhub</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-lg testimonial-card">
+                    <div class="sticky-note mb-4">
+                        "BhookhaPanda Mart has made grocery shopping so convenient for our family!"
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Client"
+                            class="w-12 h-12 rounded-full">
+                        <div>
+                            <h4 class="font-semibold">Vikram Singh</h4>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Customer, BhookhaPanda Mart</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+
+    <!-- Contact -->
+    <section id="contact" class="py-20">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Get In <span class="gradient-text">Touch</span></h2>
+                <div class="w-20 h-1 bg-blue-600 dark:bg-purple-500 mx-auto"></div>
+                <p class="max-w-2xl mx-auto mt-6 text-gray-600 dark:text-gray-300">
+                    Have a project in mind or want to discuss potential opportunities? Feel free to reach out!
+                </p>
+            </div>
+
+            <div class="flex flex-col lg:flex-row gap-12 max-w-6xl mx-auto">
+                <div class="lg:w-1/2">
+                    <form class="space-y-6">
+                        <div>
+                            <label for="name"
+                                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Your
+                                Name</label>
+                            <input type="text" id="name"
+                                class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:text-white transition-all">
+                        </div>
+                        <div>
+                            <label for="email"
+                                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email
+                                Address</label>
+                            <input type="email" id="email"
+                                class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:text-white transition-all">
+                        </div>
+                        <div>
+                            <label for="subject"
+                                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Subject</label>
+                            <input type="text" id="subject"
+                                class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:text-white transition-all">
+                        </div>
+                        <div>
+                            <label for="message"
+                                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Message</label>
+                            <textarea id="message" rows="5"
+                                class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:text-white transition-all"></textarea>
+                        </div>
+                        <button type="submit"
+                            class="w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors shadow-lg hover:shadow-xl">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+
+                <div class="lg:w-1/2">
+                    <div class="bg-gray-50 dark:bg-gray-800 p-8 rounded-xl h-full">
+                        <h3 class="text-2xl font-semibold mb-6">Contact Information</h3>
+
+                        <div class="space-y-6">
+                            <div class="flex items-start gap-4">
+                                <div class="text-blue-600 dark:text-purple-500 text-xl mt-1">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold">Email</h4>
+                                    <a href="mailto:Dg476504@gmail.com"
+                                        class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-purple-400 transition-colors">
+                                        Dg476504@gmail.com
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4">
+                                <div class="text-blue-600 dark:text-purple-500 text-xl mt-1">
+                                    <i class="fas fa-phone-alt"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold">Phone</h4>
+                                    <a href="tel:+917389152954"
+                                        class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-purple-400 transition-colors">
+                                        +91 7389152954
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4">
+                                <div class="text-blue-600 dark:text-purple-500 text-xl mt-1">
+                                    <i class="fab fa-whatsapp"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold">WhatsApp</h4>
+                                    <a href="https://wa.me/917389152954" target="_blank"
+                                        class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-purple-400 transition-colors">
+                                        +91 7389152954
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4">
+                                <div class="text-blue-600 dark:text-purple-500 text-xl mt-1">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold">Location</h4>
+                                    <p class="text-gray-600 dark:text-gray-300">
+                                        Rewa, Madhya Pradesh, India
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-8">
+                            <h4 class="font-semibold mb-4">Follow Me</h4>
+                            <div class="flex gap-4">
+                                <a href="https://github.com/DeepakGupta2002" target="_blank"
+                                    class="social-icon w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-blue-600 hover:text-white dark:hover:bg-purple-500 transition-colors">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="https://linkedin.com/in/deepak-gupta-a2891b300" target="_blank"
+                                    class="social-icon w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-blue-600 hover:text-white dark:hover:bg-purple-500 transition-colors">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                                <a href="https://itworldhub.com" target="_blank"
+                                    class="social-icon w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-blue-600 hover:text-white dark:hover:bg-purple-500 transition-colors">
+                                    <i class="fas fa-globe"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 bg-gray-100 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <a href="#" class="text-xl font-bold gradient-text">Deepak Gupta</a>
+                    <p class="text-gray-600 dark:text-gray-400 mt-1">Full Stack Developer & Entrepreneur</p>
+                </div>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="#home"
+                        class="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-purple-400 transition-colors">Home</a>
+                    <a href="#about"
+                        class="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-purple-400 transition-colors">About</a>
+                    <a href="#skills"
+                        class="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-purple-400 transition-colors">Skills</a>
+                    <a href="#projects"
+                        class="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-purple-400 transition-colors">Projects</a>
+                    <a href="#contact"
+                        class="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-purple-400 transition-colors">Contact</a>
+                </div>
+            </div>
+            <div
+                class="border-t border-gray-200 dark:border-gray-700 mt-8 pt-8 text-center text-gray-500 dark:text-gray-400">
+                <p>© 2023 Deepak Gupta. All rights reserved.</p>
+                <p class="mt-2 text-sm">Made with <i class="fas fa-heart text-red-500"></i> in Rewa, India</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop"
+        class="fixed bottom-6 right-6 w-12 h-12 bg-blue-600 dark:bg-purple-500 text-white rounded-full shadow-lg flex items-center justify-center opacity-0 invisible transition-all duration-300">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script>
+        // Theme toggle
+        function toggleTheme() {
+            document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+        }
+
+        // Check for saved theme preference
+        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
+        // Back to top button
+        const backToTopButton = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('opacity-0', 'invisible');
+                backToTopButton.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopButton.classList.remove('opacity-100', 'visible');
+                backToTopButton.classList.add('opacity-0', 'invisible');
+            }
+        });
+
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+
+                    // Update active nav link
+                    document.querySelectorAll('.nav-link').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                }
+            });
+        });
+
+        // Highlight active nav link based on scroll position
+        window.addEventListener('scroll', () => {
+            const scrollPosition = window.scrollY;
+
+            document.querySelectorAll('section').forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                const sectionHeight = section.offsetHeight;
+                const sectionId = section.getAttribute('id');
+
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    document.querySelectorAll('.nav-link').forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${sectionId}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
